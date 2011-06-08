@@ -14,4 +14,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^folkapp/$', 'folkapp.views.index'),
+    url(r'^folkapp/user/(?P<id_user>\d+)/$', 'folkapp.views.user_profile'),
+    url(r'^folkapp/band/(?P<id_band>\d+)/$', 'folkapp.views.band_profile'),
+    url(r'^folkapp/tag/(?P<id_tag>\d+)/$', 'folkapp.views.bands_by_tag'),
+    url(r'^folkapp/recommendations/$', 'folkapp.views.recommendations'),
 )
