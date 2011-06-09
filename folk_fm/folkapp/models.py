@@ -21,8 +21,8 @@ class UserProfile(models.Model):
 
         for friend in self.friends.all():
             if (friend.id == user.id):
-                return True
-        return False
+                return False
+        return True
 
 class Tag(models.Model):
     text = models.CharField(max_length=20)
