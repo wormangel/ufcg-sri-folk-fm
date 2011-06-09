@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {{ userprofile.name }} profile: <br />
-    {{ user.get_profile.friends }}
+    {{ user_profile.name }} profile: <br />
+    {% if can_add %}
+        <input type="submit" value="add friend" />
+    {% endif %}
 
 {% endblock %}
