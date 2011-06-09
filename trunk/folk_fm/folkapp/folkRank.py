@@ -4,7 +4,6 @@ Created on May 28, 2009
 @author: anamariastoica
 '''
 
-import ana.dbaccess as db
 
 from pysparse import spmatrix
 import numpy as np
@@ -180,33 +179,6 @@ def writeResultsToFile(filename, res, users=None, resources=None, tags=None):
     f.close()
 
 if __name__ == '__main__':
-
-    # create users, resources and tag objects
-    users = db.Users()
-    resources = db.Resources()
-    tags = db.Tags()
-
-    # fetch users, resources and tags from repository
-    users.fetchFromDB()
-    resources.fetchFromDB()
-    tags.fetchFromDB()
-
-    # create user-tag-resource relations object
-    urt = db.UserResourceTag(users, resources, tags)
-    # fetch relations from db
-    urt.fetchFromDB()
-
-    # print data
-    f = open('res_repr.txt', 'w')
-    f.write('\n\n\nUSERS\n\n\n')
-    f.write(repr(users))
-    f.write('\n\n\nRESOURCES\n\n\n')
-    f.write(repr(resources))
-    f.write('\n\n\nTAAAAGS\n\n\n')
-    f.write(repr(tags))
-    f.write('\n\n\nRELATIONS\n\n\n')
-    for (u, r, t) in urt.urt:
-        f.write('(%d, %d, %d)\n' % (u, r, t))
 
     # init folk rank algorithm
     fr = FolkRank(
