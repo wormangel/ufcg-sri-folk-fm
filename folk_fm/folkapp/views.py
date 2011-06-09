@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from folkapp.models import *
+from folkapp.folkRank import FolkRank
 
 
 def index(request):
@@ -75,3 +76,28 @@ def populate_test_db(request):
         utb = UserTagBand(user=lucas.get_profile(), tag=tag, band=banda)
         utb.save()
     return HttpResponse('Ok!')
+
+def recommendations(request):
+    urt = UserTagBand.objects.all()
+    fr = FolkRank(
+        urt=urt,
+        nu=UserProfile.objects.all().count(),
+        nr=Band.objects.all().count(),
+        nt=Tag.objects.all().count()
+    )
+    return HttpResponse('Ok!')
+
+def createTagging(request, id_band):
+    band = get_object_or_404(Band, pk=id_band)
+    tag = Tag.objects.filter(text=request.POST['txtTag'])
+    if (tag.count() == 0):
+        tag = Tag(text=request.POST['txtTag'])
+        tag.save()
+    tag = Tag.objects.get(text=request.POST['txtTag'])
+
+    if (UserTagBand.objects.filter(user = request.user.get_profile(), band = band, tag = tag).count() == 0):  
+        return HttpResponse('Ok!')
+        utb = UserTagBand(user = request.user.get_profile(), band = band, tag = tag)
+        utb.save()
+
+    return render_to_response('band_profile.html', {'id_band': id_band}, context_instance=RequestContext(request))
