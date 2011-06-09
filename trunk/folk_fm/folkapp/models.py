@@ -14,6 +14,16 @@ class UserProfile(models.Model):
     def addFriend(self, user):
         pass
 
+    def can_become_friend(self, user):
+        # if I am myself
+        if (user.id == self.id):
+            return False
+
+        for friend in self.friends.all():
+            if (friend.id == user.id):
+                return True
+        return False
+
 class Tag(models.Model):
     text = models.CharField(max_length=20)
 	
