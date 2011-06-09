@@ -4,4 +4,8 @@
 
 {% block content %}
 Welcome to folk.fm!
+<br>
+{% if user.is_authenticated %}
+Logged in as <b>{{ user.username }}</b>
+{% endif %}
 {% endblock %}

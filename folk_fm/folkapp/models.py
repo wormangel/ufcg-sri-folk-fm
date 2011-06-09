@@ -21,6 +21,6 @@ class Band(models.Model):
     name = models.CharField(max_length=40)
 
 class UserTagBand(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(UserProfile)
     tag = models.ForeignKey(Tag)
     band = models.ForeignKey(Band)

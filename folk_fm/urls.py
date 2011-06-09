@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^folkapp/tag/(?P<id_tag>\d+)/$', 'folkapp.views.bands_by_tag'),
     url(r'^folkapp/recommendations/$', 'folkapp.views.recommendations'),
     url(r'^folkapp/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^folkapp/start/$', 'folkapp.views.populate_test_db'),
 )

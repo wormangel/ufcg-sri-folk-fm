@@ -105,7 +105,7 @@ ROOT_URLCONF = 'folk_fm.urls'
 AUTH_PROFILE_MODULE = 'folkapp.UserProfile'
 
 LOGIN_URL = '/folkapp/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/folkapp/'
 LOGOUT_URL = '/folkapp/logout/'
 
 TEMPLATE_DIRS = ( 'templates'
