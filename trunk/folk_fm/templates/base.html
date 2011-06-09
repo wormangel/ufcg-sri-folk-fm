@@ -13,12 +13,13 @@
         {% block sidebar %}
         <ul>
             {% if not user.is_authenticated %}
-                <li><a href="/folkapp/login/">Login</a></li>
+                <li><a href="/login/">Login</a></li>
             {% else %}
-                <li><a href="/folkapp/">Home</a></li>
-                <li><a href="/folkapp/">Users</a></li>
-                <li><a href="/folkapp/">Bands</a></li>
-                <li><a href="/folkapp/">Tags</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/">Users</a></li>
+                <li><a href="/band/">Bands</a></li>
+                <li><a href="/tag/">Tags</a></li>
+                <li><a href="/logout/">Logout</a></li>
             {% endif %}
 
         </ul>
