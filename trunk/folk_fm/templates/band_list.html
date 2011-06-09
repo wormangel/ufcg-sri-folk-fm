@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Folk.fm band list: <br />
+
+    {% for band in bands %}
+        <li><a href="/band/{{band.id}}">{{ band.name }}</a></li>
+    {% endfor %}
+{% endblock %}
