@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Bands tagged with <b>{{tag.text}}</b>: <br />
+
+    {% for band in bands %}
+        <li><a href="/band/{{band.id}}">{{ band.name }}</a></li>
+    {% endfor %}
+{% endblock %}
