@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic import DetailView, ListView
+from folkapp.models import UserProfile
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -15,11 +17,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^folkapp/$', 'folkapp.views.index'),
-    url(r'^folkapp/user/(?P<id_user>\d+)/$', 'folkapp.views.user_profile'),
-    url(r'^folkapp/band/(?P<id_band>\d+)/$', 'folkapp.views.band_profile'),
-    url(r'^folkapp/tag/(?P<id_tag>\d+)/$', 'folkapp.views.bands_by_tag'),
-    url(r'^folkapp/recommendations/$', 'folkapp.views.recommendations'),
-    url(r'^folkapp/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-    url(r'^folkapp/start/$', 'folkapp.views.populate_test_db'),
+    url(r'^$', 'folkapp.views.index'),
+    url(r'^user/$', ListView.as_view(queryset=UserProfile.objects.all(), context_object_name='users', template_name='user_list.html')),
+    url(r'^user/(?P<pk>\d+)/$', DetailView.as_view(model=UserProfile, template_name='user_profile.html')),
+    url(r'^band/(?P<id_band>\d+)/$', 'folkapp.views.band_profile'),
+    url(r'^tag/(?P<id_tag>\d+)/$', 'folkapp.views.bands_by_tag'),
+    url(r'^recommendations/$', 'folkapp.views.recommendations'),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
+    url(r'^start/$', 'folkapp.views.populate_test_db'),
 )
