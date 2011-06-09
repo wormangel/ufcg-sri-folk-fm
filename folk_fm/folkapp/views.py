@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from folkapp.models import UserProfile
+from folkapp.models import *
 
 
 def index(request):
@@ -24,8 +24,14 @@ def user_profile(request, id_user):
     return render_to_response('user_profile.html', {'user_profile': user_profile, 'can_add': can_add}, context_instance=RequestContext(request))
 
 @login_required
+def band_list(request):
+    bands = Band.objects.all()
+    return render_to_response('band_list.html', {'bands': bands}, context_instance=RequestContext(request))
+
+@login_required
 def band_profile(request, id_band):
-    return HttpResponse('This is the band profile page! :D')
+    band = get_object_or_404(Band, pk=id_band)
+    return render_to_response('band_profile.html', {'band': band}, context_instance=RequestContext(request))
 
 @login_required
 def bands_by_tag(request, id_tag):
@@ -46,5 +52,9 @@ def populate_test_db(request):
     lucas = User(username='lucas')
     lucas.set_password('123')
     lucas.save()
-    lucas.id
+    vitor = User(username='vitor')
+    vitor.set_password('123')
+    vitor.save()
+    banda = Band(name='banda')
+    banda.save()
     return HttpResponse('Ok!')
