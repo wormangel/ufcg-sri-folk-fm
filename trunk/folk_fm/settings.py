@@ -104,6 +104,10 @@ ROOT_URLCONF = 'folk_fm.urls'
 
 AUTH_PROFILE_MODULE = 'folkapp.UserProfile'
 
+LOGIN_URL = '/folkapp/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/folkapp/logout/'
+
 TEMPLATE_DIRS = ( 'templates'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.

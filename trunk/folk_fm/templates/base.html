@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Folk.fm{% endblock %}
+</head>
+
+<body>
+    <div style="display:block">
+    <div id="sidebar" style="float: left; display: inline; position: relative; width: 125px; 
+        margin-bottom: 15px; padding-right: 15px; border-right: 1px solid #ccc; clear: left;">
+
+        {% block sidebar %}
+        <ul>
+            {% if not user.is_authenticated %}
+                <li><a href="/folkapp/login/">Login</a></li>
+            {% else %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Users</a></li>
+                <li><a href="/">Bands</a></li>
+                <li><a href="/">Tags</a></li>
+            {% endif %}
+
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content" >
+        {% block content %}{% endblock %}
+    </div>
+    </div>
+</body>
+</html>
