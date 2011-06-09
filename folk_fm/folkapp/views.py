@@ -34,8 +34,18 @@ def band_profile(request, id_band):
     return render_to_response('band_profile.html', {'band': band}, context_instance=RequestContext(request))
 
 @login_required
+def tag_list(request):
+    tags = Tag.objects.all()
+    return render_to_response('tag_list.html', {'tags': tags}, context_instance=RequestContext(request))
+
+@login_required
 def bands_by_tag(request, id_tag):
-    return HttpResponse('This page lists every single band marked with a specific tag! :D')
+    chosen_tag = Tag.objects.get(id=id_tag)
+    utbs = UserTagBand.objects.filter(tag=chosen_tag)
+    
+    bands = [utb.band for utb in utbs]
+
+    return render_to_response('bands_by_tag.html', {'bands': bands, 'tag': chosen_tag}, context_instance=RequestContext(request))
 
 @login_required
 def recommendations(request):
@@ -55,6 +65,13 @@ def populate_test_db(request):
     vitor = User(username='vitor')
     vitor.set_password('123')
     vitor.save()
-    banda = Band(name='banda')
-    banda.save()
+    for i in range(1,11):
+        banda = Band(name='banda' + str(i))
+        banda.save()
+    tag = Tag(text='Impar')
+    tag.save()
+    for i in range(1,11,2):
+        banda = Band.objects.get(id=i)
+        utb = UserTagBand(user=lucas.get_profile(), tag=tag, band=banda)
+        utb.save()
     return HttpResponse('Ok!')
