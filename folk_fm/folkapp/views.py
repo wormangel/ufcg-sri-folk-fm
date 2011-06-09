@@ -1,8 +1,9 @@
 # Create your views here.
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 
 def index(request):
-    return HttpResponse('This is the index (login?) page! :D')
+    return render_to_response('home.html')
 
 def user_profile(request, id_user):
     return HttpResponse('This is the user profile page! :D')
